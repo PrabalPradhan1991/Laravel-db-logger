@@ -1,0 +1,30 @@
+{
+    "name": "diagonal/db-logger",
+    "description": "Package to record eloquent mutation queries",
+    "authors": [
+        {
+            "name": "Prabal",
+            "email": "prabal.pradhan@nextly.solutions"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Diagonal\\DbLogger\\": "src/"
+        }
+    },
+    "require": {
+        "mongodb/laravel-mongodb": "^5.1"
+    },
+    "require-dev": {
+        "pestphp/pest": "3.x-dev",
+        "orchestra/testbench": "9.x-dev",
+        "laravel/pint": "dev-main",
+        "phpstan/phpstan": "1.12.x-dev"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
