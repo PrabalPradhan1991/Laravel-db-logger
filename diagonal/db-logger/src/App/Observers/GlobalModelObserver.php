@@ -7,11 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class GlobalModelObserver
 {
+    const INSERT = 'INSERT';
+
+    const UPDATE = 'UPDATE';
+
+    const DELETE = 'DELETE';
+
+    const RESTORED = 'RESTORED';
+
+    const FORCE_DELETED = 'FORCE_DELETED';
+
     public function created(Model $model)
     {
         $this->storeInLogger(
             $model,
-            'INSERT'
+            self::INSERT
         );
     }
 
@@ -19,7 +29,7 @@ class GlobalModelObserver
     {
         $this->storeInLogger(
             $model,
-            'UPDATE'
+            self::UPDATE
         );
     }
 
@@ -27,7 +37,7 @@ class GlobalModelObserver
     {
         $this->storeInLogger(
             $model,
-            'DELETE'
+            self::DELETE
         );
     }
 
@@ -35,7 +45,7 @@ class GlobalModelObserver
     {
         $this->storeInLogger(
             $model,
-            'FORCE_DELETED'
+            self::FORCE_DELETED
         );
     }
 
@@ -43,7 +53,7 @@ class GlobalModelObserver
     {
         $this->storeInLogger(
             $model,
-            'RESOTRED'
+            self::RESTORED
         );
     }
 

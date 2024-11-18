@@ -13,7 +13,10 @@ class DbLoggerController extends Controller
      */
     public function all(DbLoggerService $dbLoggerService, Request $request)
     {
-        return $dbLoggerService->allRecords($request->get('model'), $request->get('model_id'), $request->get('action'));
+        $data = $dbLoggerService->allRecords($request->get('model'), $request->get('model_id'), $request->get('action'));
+
+        return view('db-logger::list')
+            ->with('data', $data);
     }
 
     public function paginated(DbLoggerService $dbLoggerService, Request $request)
