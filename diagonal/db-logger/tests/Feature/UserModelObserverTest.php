@@ -1,10 +1,16 @@
 <?php
 
 use Diagonal\DbLogger\App\Models\DbLogger;
+use Diagonal\DbLogger\App\Observers\GlobalModelObserver;
 use Diagonal\DbLogger\Tests\Models\User;
 use Diagonal\DbLogger\Tests\TestCase;
 
 uses(TestCase::class);
+
+beforeEach(function () {
+    $this->createdUser = createUser();
+});
+
 
 test('it logs user creation', function () {
     // Create a user
@@ -69,4 +75,37 @@ test('it logs user deletion', function () {
     expect($log)->not->toBeNull()
         ->and($log->model)->toBe(User::class)
         ->and($log->model_id)->toBe($userId);
+});
+
+
+test('check if RESTORE event is correctly loaded', function () {
+    $createdUser = createUser();
+    $userClass = get_class($createdUser);
+
+    $createdUserId = $createdUser->id;
+    $createdUser->delete();
+    $createdUser->restore();
+
+    $loggedData = DbLogger::where('model_id', $createdUserId)
+        ->where('model', $userClass)
+        ->where('action', GlobalModelObserver::RESTORED)
+        ->get();
+
+    expect($loggedData->count())->toBeOne();
+});
+
+test('check if FORCE_DELETED event is correctly loaded', function () {
+    $createdUser = createUser();
+    $userClass = get_class($createdUser);
+
+    $createdUserId = $createdUser->id;
+    $createdUser->delete();
+    $createdUser->forceDelete();
+
+    $loggedData = DbLogger::where('model_id', $createdUserId)
+        ->where('model', $userClass)
+        ->where('action', GlobalModelObserver::FORCE_DELETED)
+        ->get();
+
+    expect($loggedData->count())->toBeOne();
 });
