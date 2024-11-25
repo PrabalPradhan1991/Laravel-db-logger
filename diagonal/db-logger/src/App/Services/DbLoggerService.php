@@ -2,34 +2,34 @@
 
 namespace Diagonal\DbLogger\App\Services;
 
+use Diagonal\DbLogger\App\Infrastructure\Filters\BaseFilter;
 use Diagonal\DbLogger\App\Infrastructure\Filters\DbLoggerFilter;
-use Diagonal\DbLogger\App\Infrastructure\Traits\HasFilter;
-use Diagonal\DbLogger\App\Models\DbLogger;
 
 class DbLoggerService
 {
-    use HasFilter;
+    protected $model;
 
-    public function allRecords(string $model, int|string $recordId, ?string $action)
+    public function __construct()
     {
-        $query = DbLogger::filter(new DbLoggerFilter([
-            'model' => $model,
-            'mode_id' => $recordId,
-            'action' => $action,
-        ]));
-
-        return $query->get();
-
+        $modelClass = config('db-logger.model');
+        $this->model = new $modelClass;
     }
 
-    public function paginatedRecords(string $model, int|string $recordId, ?string $action)
+    public function allRecords(string $model, int|string $recordId, ?string $action = null)
     {
-        $query = DbLogger::filter(new DbLoggerFilter([
+        return $this->model::filter(new DbLoggerFilter([
             'model' => $model,
-            'mode_id' => $recordId,
+            'model_id' => $recordId,
             'action' => $action,
-        ]));
+        ]))->get();
+    }
 
-        return $query->paginate();
+    public function paginatedRecords(string $model, int|string $recordId, ?string $action = null)
+    {
+        return $this->model::filter(new DbLoggerFilter([
+            'model' => $model,
+            'model_id' => $recordId,
+            'action' => $action,
+        ]))->paginate();
     }
 }

@@ -6,8 +6,8 @@ return [
     | Database Connection
     |--------------------------------------------------------------------------
     |
-    | This value determines which database connection will be used for logging.
-    | Supported: "mongodb", "mysql"
+    | Here you may specify which of the database connections below you wish
+    | to use as your default connection for logger operations.
     |
     */
     'connection' => env('DB_LOGGER_CONNECTION', 'mongodb'),
@@ -17,9 +17,20 @@ return [
     | Collection/Table Name
     |--------------------------------------------------------------------------
     |
-    | This value determines the name of the collection (MongoDB) or table (MySQL)
-    | that will be used to store the logs.
+    | Here you may specify the default collection (MongoDB) or table (SQL)
+    | name that should be used for logging operations.
     |
     */
     'collection' => env('DB_LOGGER_COLLECTION', 'db_logs'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify your own implementation of the DbLogger model.
+    | This allows you to extend and override the default behavior.
+    |
+    */
+    'model' => \Diagonal\DbLogger\App\Models\DbLogger::class,
 ];

@@ -19,6 +19,8 @@
         }
     },
     "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0",
         "mongodb/laravel-mongodb": "^5.1"
     },
     "require-dev": {
@@ -30,6 +32,13 @@
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Diagonal\\DbLogger\\App\\Providers\\DbLoggerProvider"
+            ]
         }
     }
 }
