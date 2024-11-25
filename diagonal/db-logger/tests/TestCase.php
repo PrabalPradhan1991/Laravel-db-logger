@@ -18,12 +18,27 @@ class TestCase extends Orchestra
 
     protected function defineEnvironment($app)
     {
-        // Setup MongoDB configuration for testing
-        $app['config']->set('database.default', 'mongodb');
+        // Setup MySQL configuration for testing
+        $app['config']->set('database.default', 'mysql');
+        $app['config']->set('database.connections.mysql', [
+            'driver' => 'mysql',
+            'host' => 'db-record-db-test',
+            'port' => '3306',
+            'database' => 'db-record-db',
+            'username' => 'root',
+            'password' => 'password',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ]);
+
+        // Setup MongoDB configuration for logging
         $app['config']->set('database.connections.mongodb', [
             'driver' => 'mongodb',
-            'host' => env('DB_HOST', 'db-record-mongodb'),
-            'port' => env('DB_PORT', 27017),
+            'host' => 'db-record-mongodb',
+            'port' => 27017,
             'database' => 'testing',
             'username' => 'root',
             'password' => 'password',
@@ -35,10 +50,10 @@ class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations()
     {
-        // Clean up the test database
+        // Clean up and run migrations for MySQL first
         $this->artisan('migrate:fresh');
-        
-        // Run your package migrations
-        // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        // Then load the User migration from tests directory
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
     }
 }

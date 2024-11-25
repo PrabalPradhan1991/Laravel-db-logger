@@ -17,10 +17,10 @@ test('it can retrieve all db logs', function () {
         'model_id' => '1',
         'action' => 'create'
     ];
-    
+
     // Act
     $response = $this->get('/api/records-all?' . http_build_query($params));
-    
+
     // Assert
     $response->assertStatus(200);
     expect($response->json())->toBeArray();
@@ -33,14 +33,14 @@ test('db logs endpoint returns the correct structure', function () {
         'model_id' => '1',
         'action' => 'create'
     ];
-    
+
     // Act
     $response = $this->get('/api/records-all?' . http_build_query($params));
-    
+
     // Assert
     $response->assertStatus(200);
     $data = $response->json();
-    
+
     expect($data)
         ->toBeArray()
         ->and($response->headers->get('content-type'))

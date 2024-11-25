@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class GlobalModelObserver
 {
-    const INSERT = 'INSERT';
+    public const INSERT = 'INSERT';
 
-    const UPDATE = 'UPDATE';
+    public const UPDATE = 'UPDATE';
 
-    const DELETE = 'DELETE';
+    public const DELETE = 'DELETE';
 
-    const RESTORED = 'RESTORED';
+    public const RESTORED = 'RESTORED';
 
-    const FORCE_DELETED = 'FORCE_DELETED';
+    public const FORCE_DELETED = 'FORCE_DELETED';
 
     public function created(Model $model)
     {
