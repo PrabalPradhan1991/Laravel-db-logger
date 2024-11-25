@@ -2,9 +2,9 @@
 
 namespace Diagonal\DbLogger\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Diagonal\DbLogger\App\Providers\DbLoggerProvider;
 use MongoDB\Laravel\MongoDBServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
@@ -43,7 +43,7 @@ class TestCase extends Orchestra
             'username' => 'root',
             'password' => 'password',
             'options' => [
-                'database' => 'admin'
+                'database' => 'admin',
             ],
         ]);
     }
@@ -54,6 +54,6 @@ class TestCase extends Orchestra
         $this->artisan('migrate:fresh');
 
         // Then load the User migration from tests directory
-        $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
 }

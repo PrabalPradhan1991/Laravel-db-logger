@@ -1,8 +1,8 @@
 <?php
 
-use Diagonal\DbLogger\Tests\TestCase;
-use Diagonal\DbLogger\Tests\Models\User;
 use Diagonal\DbLogger\App\Models\DbLogger;
+use Diagonal\DbLogger\Tests\Models\User;
+use Diagonal\DbLogger\Tests\TestCase;
 
 uses(TestCase::class);
 
@@ -11,7 +11,7 @@ test('it logs user creation', function () {
     $user = User::create([
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => bcrypt('password')
+        'password' => bcrypt('password'),
     ]);
 
     // Check if the creation was logged
@@ -30,7 +30,7 @@ test('it logs user update', function () {
     $user = User::create([
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => bcrypt('password')
+        'password' => bcrypt('password'),
     ]);
 
     // Update the user
@@ -52,7 +52,7 @@ test('it logs user deletion', function () {
     $user = User::create([
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => bcrypt('password')
+        'password' => bcrypt('password'),
     ]);
 
     $userId = $user->id;

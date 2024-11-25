@@ -2,7 +2,6 @@
 
 namespace Diagonal\DbLogger\App\Services;
 
-use Diagonal\DbLogger\App\Infrastructure\Filters\BaseFilter;
 use Diagonal\DbLogger\App\Infrastructure\Filters\DbLoggerFilter;
 
 class DbLoggerService

@@ -2,9 +2,9 @@
 
 namespace Diagonal\DbLogger\Tests\Models;
 
+use Diagonal\DbLogger\App\Observers\GlobalModelObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Diagonal\DbLogger\App\Observers\GlobalModelObserver;
 
 class User extends Model
 {

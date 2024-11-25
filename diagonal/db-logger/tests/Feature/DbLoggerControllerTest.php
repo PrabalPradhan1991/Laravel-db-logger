@@ -1,7 +1,7 @@
 <?php
 
-use Diagonal\DbLogger\Tests\TestCase;
 use Diagonal\DbLogger\App\Http\Controllers\DbLoggerController;
+use Diagonal\DbLogger\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
 
 uses(TestCase::class);
@@ -15,11 +15,11 @@ test('it can retrieve all db logs', function () {
     $params = [
         'model' => 'User',
         'model_id' => '1',
-        'action' => 'create'
+        'action' => 'create',
     ];
 
     // Act
-    $response = $this->get('/api/records-all?' . http_build_query($params));
+    $response = $this->get('/api/records-all?'.http_build_query($params));
 
     // Assert
     $response->assertStatus(200);
@@ -31,11 +31,11 @@ test('db logs endpoint returns the correct structure', function () {
     $params = [
         'model' => 'User',
         'model_id' => '1',
-        'action' => 'create'
+        'action' => 'create',
     ];
 
     // Act
-    $response = $this->get('/api/records-all?' . http_build_query($params));
+    $response = $this->get('/api/records-all?'.http_build_query($params));
 
     // Assert
     $response->assertStatus(200);

@@ -2,10 +2,10 @@
 
 namespace Diagonal\DbLogger\App\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Diagonal\DbLogger\App\Services\DbLoggerService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class DbLoggerController extends Controller
 {
