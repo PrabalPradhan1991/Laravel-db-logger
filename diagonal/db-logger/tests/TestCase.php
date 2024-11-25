@@ -5,6 +5,7 @@ namespace Diagonal\DbLogger\Tests;
 use Diagonal\DbLogger\App\Providers\DbLoggerProvider;
 use MongoDB\Laravel\MongoDBServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Illuminate\Support\Facades\DB;
 
 class TestCase extends Orchestra
 {
@@ -55,5 +56,19 @@ class TestCase extends Orchestra
 
         // Then load the User migration from tests directory
         $this->loadMigrationsFrom(__DIR__.'/migrations');
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Clear MongoDB collection before each test
+        try {
+            DB::connection('mongodb')
+                ->getCollection('db_logs')
+                ->deleteMany([]);
+        } catch (\Exception $e) {
+            // If collection doesn't exist yet, that's fine
+        }
     }
 }
