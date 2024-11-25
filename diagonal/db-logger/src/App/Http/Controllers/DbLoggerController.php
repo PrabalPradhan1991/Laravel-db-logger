@@ -2,21 +2,25 @@
 
 namespace Diagonal\DbLogger\App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Diagonal\DbLogger\App\Services\DbLoggerService;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class DbLoggerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function all(DbLoggerService $dbLoggerService, Request $request)
+    public function all(DbLoggerService $dbLoggerService, Request $request): JsonResponse
     {
-        $data = $dbLoggerService->allRecords($request->get('model'), $request->get('model_id'), $request->get('action'));
+        $data = $dbLoggerService->allRecords(
+            $request->get('model'),
+            $request->get('model_id'),
+            $request->get('action')
+        );
 
-        return view('db-logger::list')
-            ->with('data', $data);
+        return response()->json($data);
     }
 
     public function paginated(DbLoggerService $dbLoggerService, Request $request)

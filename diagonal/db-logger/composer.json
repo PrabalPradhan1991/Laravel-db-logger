@@ -13,6 +13,11 @@
             "Diagonal\\DbLogger\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Diagonal\\DbLogger\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "mongodb/laravel-mongodb": "^5.1"
     },
